@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pixel_rect_draw.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 21:42:30 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/14 02:06:59 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/14 23:05:29 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "so_long.h"
 #include "./mlx/mlx.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 #define	GREEN_PIXEL 0xFF00
 #define RED_PIXEL 0xFF0000
@@ -21,6 +23,7 @@
 #define	WINDOW_WIDTH 600
 #define	WINDOW_HEIGHT 300
 
+/*
 typedef struct s_rect
 {
 	int	x;
@@ -48,9 +51,7 @@ typedef struct s_data
 //	int		line_length;
 //	int		ending;
 }	t_data;
-
-
-
+*/
 /*void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -161,9 +162,12 @@ void	render_background(t_img *img, int color)
 
 int	render(t_data *data)
 {
+	int colour;
+
 	if (data->window == NULL)
 		return (1);
-	render_background(&data->img, WHITE_PIXEL);
+	colour = create_colour(0, 255, 255, 0);
+	render_background(&data->img, colour);
 	render_rect(&data->img, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100, 100, 100, GREEN_PIXEL});
 	render_rect(&data->img, (t_rect){0, 0, 500, 300, RED_PIXEL});
 	mlx_put_image_to_window(data->mlx, data->window, data->img.img, 0, 0);
@@ -187,6 +191,7 @@ int	main(void)
 	data->window = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Hello World");
 	data->img.img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp, &data->img.line_length, &data->img.ending);
+//	printf("bbp = %d, line_length = %d, endian = %d,", data->img.bpp, data->img.line_length, data->img.ending);
 	render(data);
 
 /*	rect.x = 100;
