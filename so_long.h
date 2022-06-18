@@ -55,6 +55,14 @@ typedef struct s_data
 	t_img   img;
 }   t_data;
 
+//	main functions //
+char	**sl_read_map(char **argv);
+
+//	util testing functions //
+void twostarstools(char **str, int mode);
+int	sl_checklen(char **rts, char *str, int mode);
+
+
 int	create_colour(int t, int r, int g, int b);
 int	get_colour(int colour, int mode);
 int create_color(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
