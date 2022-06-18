@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:57:23 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/03/11 23:40:44 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/18 23:53:03 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_info_tranfer(char *temp, char *info, int len)
 
 	index = 0;
 	xedni = 0;
-	result = ft_calloc(sizeof(char) * len + 1);
+	result = gl_calloc(sizeof(char) * len + 1);
 	if (result == NULL)
 		return (0);
 	while ((temp != NULL && temp[index] != '\0'))
@@ -48,7 +48,7 @@ char	*ft_checknread_temp(int fd, char *temp, char *brain)
 	len = 0;
 	if (brain != NULL && brain[0] != '\0')
 	{
-		temp = ft_info_tranfer(temp, brain, ft_strlen(brain, 1));
+		temp = ft_info_tranfer(temp, brain, gl_strlen(brain, 1));
 		if (temp == NULL)
 			return (0);
 		free(brain);
@@ -57,7 +57,7 @@ char	*ft_checknread_temp(int fd, char *temp, char *brain)
 	{
 		if (ft_check_newline(temp) == 1)
 			return (temp);
-		len = ft_strlen(temp, 1);
+		len = gl_strlen(temp, 1);
 	}
 	temp = ft_read_file(fd, temp, len);
 	if (temp == NULL)
@@ -71,7 +71,7 @@ char	*ft_read_file(int fd, char *temp, int len)
 	char	*info;
 
 	byte = 0;
-	info = ft_calloc(sizeof(char) * BUFFER_SIZE);
+	info = gl_calloc(sizeof(char) * BUFFER_SIZE);
 	if (info == NULL)
 		return (0);
 	while (1 > 0)
@@ -96,7 +96,7 @@ char	*ft_checknstore_brain(char *result, char *temp, int index, int len)
 	char	*brain;
 
 	xedni = 0;
-	brain = ft_calloc(sizeof(char) * ft_strlen(&temp[index], 1) + 1);
+	brain = gl_calloc(sizeof(char) * gl_strlen(&temp[index], 1) + 1);
 	if (brain == NULL)
 		return (0);
 	while (temp[index] != '\0')
@@ -132,7 +132,7 @@ char	*get_next_line(int fd)
 	temp = ft_checknread_temp(fd, temp, brain);
 	if (temp == NULL)
 		return (0);
-	result = ft_calloc(sizeof(char) * ft_strlen(temp, 0) + 2);
+	result = gl_calloc(sizeof(char) * gl_strlen(temp, 0) + 2);
 	if (result == NULL)
 		return (0);
 	while (temp[index] != '\n' && temp[index] != '\0')

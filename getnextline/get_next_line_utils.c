@@ -6,13 +6,13 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 06:56:28 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/03/09 18:53:46 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/18 23:50:52 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_calloc(int size)
+char	*gl_calloc(int size)
 {
 	char	*result;
 	int		index;
@@ -29,7 +29,7 @@ char	*ft_calloc(int size)
 	return (result);
 }
 
-int	ft_strlen(char *str, int index)
+int	gl_strlen(char *str, int index)
 {
 	int	count;
 

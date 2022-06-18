@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/14 23:07:52 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/18 22:47:44 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 # define WINDOW_HEIGHT 300
 # define WINDOW_WIDTH 600
