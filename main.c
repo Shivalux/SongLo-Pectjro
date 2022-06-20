@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 22:33:04 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/21 03:16:39 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:50:05 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,32 @@ void	sl_map_generate(t_data *data, int f)
 {
 	t_file	img1;
 	t_file	img2;
-	t_file	img3;
 	t_file	img5;
 
 	
 	int index = 0;
 	img1.img = mlx_xpm_file_to_image(data->mlx, "./images/1/1.xpm", &img1.wid, &img1.hei);
 	img2.img = mlx_xpm_file_to_image(data->mlx, "./images/0/0.xpm", &img2.wid, &img2.hei); 
+	data->p[0].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P1.xpm", &data->p[0].wid, &data->p[0].hei);
+	data->p[1].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P2.xpm", &data->p[1].wid, &data->p[1].hei);
+	data->p[2].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P3.xpm", &data->p[2].wid, &data->p[2].hei);
+	data->p[3].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P4.xpm", &data->p[3].wid, &data->p[3].hei);
+	data->p[4].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P5.xpm", &data->p[4].wid, &data->p[4].hei);
+	data->p[5].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P6.xpm", &data->p[5].wid, &data->p[5].hei);
+	data->p[6].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P7.xpm", &data->p[6].wid, &data->p[6].hei);
+	data->p[7].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P8.xpm", &data->p[7].wid, &data->p[7].hei);
+	data->p[8].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P9.xpm", &data->p[8].wid, &data->p[8].hei);
+	data->p[9].img = mlx_xpm_file_to_image(data->mlx, "./images/P/P0.xpm", &data->p[9].wid, &data->p[9].hei);
+	data->p[10].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb1.xpm", &data->p[10].wid, &data->p[10].hei);
+	data->p[11].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb2.xpm", &data->p[11].wid, &data->p[11].hei);
+	data->p[12].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb3.xpm", &data->p[12].wid, &data->p[12].hei);
+	data->p[13].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb4.xpm", &data->p[13].wid, &data->p[13].hei);
+	data->p[14].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb5.xpm", &data->p[14].wid, &data->p[14].hei);
+	data->p[15].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb6.xpm", &data->p[15].wid, &data->p[15].hei);
+	data->p[16].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb7.xpm", &data->p[16].wid, &data->p[16].hei);
+	data->p[17].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb8.xpm", &data->p[17].wid, &data->p[17].hei);
+	data->p[18].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb9.xpm", &data->p[18].wid, &data->p[18].hei);
+	data->p[19].img = mlx_xpm_file_to_image(data->mlx, "./images/P/Pb0.xpm", &data->p[19].wid, &data->p[19].hei);
 	data->c[0].img = mlx_xpm_file_to_image(data->mlx, "./images/C/C1.xpm", &data->c[0].wid, &data->c[0].hei);
 	data->c[1].img = mlx_xpm_file_to_image(data->mlx, "./images/C/C2.xpm", &data->c[1].wid, &data->c[1].hei);
 	data->c[2].img = mlx_xpm_file_to_image(data->mlx, "./images/C/C3.xpm", &data->c[2].wid, &data->c[2].hei);
@@ -52,7 +71,6 @@ void	sl_map_generate(t_data *data, int f)
 	data->c[7].img = mlx_xpm_file_to_image(data->mlx, "./images/C/C8.xpm", &data->c[7].wid, &data->c[7].hei);
 	data->c[8].img = mlx_xpm_file_to_image(data->mlx, "./images/C/C9.xpm", &data->c[8].wid, &data->c[8].hei);
 	data->c[9].img = mlx_xpm_file_to_image(data->mlx, "./images/C/C5.xpm", &data->c[9].wid, &data->c[9].hei);
-	img3.img = mlx_xpm_file_to_image(data->mlx, "./images/test3.xpm", &img3.wid, &img3.hei);
 	img5.img = mlx_xpm_file_to_image(data->mlx, "./images/test5.xpm", &img5.wid, &img5.hei);
 	while (data->map[index] != NULL)
 	{
@@ -72,7 +90,7 @@ void	sl_map_generate(t_data *data, int f)
 					mlx_put_image_to_window(data->mlx, data->window, img5.img, (xedni * 32), (index * 32));
 				else if (data->map[index][xedni] == 'P')
 				{
-					mlx_put_image_to_window(data->mlx, data->window, img3.img, (xedni * 32), (index * 32));
+					mlx_put_image_to_window(data->mlx, data->window, data->p[data->pf + f].img, (xedni * 32), (index * 32));
 					data->x = index;
 					data->y = xedni;
 				}
@@ -127,11 +145,17 @@ int	sl_keyinput(int keycode, t_data *data)
 	static int	count = 0;
 
 	if (keycode == KEY_LEFT && data->y > 0)// || keycode == KEY_A)
+	{
 		sl_walkswap(data, KEY_LEFT);
+		data->pf = 10;
+	}
 	else if (keycode == KEY_DOWN && data->x < sl_checklen(data->map, NULL, 1) - 1)//|| keycode == KEY_S)
 		sl_walkswap(data, KEY_DOWN);
 	else if (keycode == KEY_RIGHT && data->y < sl_checklen(NULL, data->map[0], 2) - 1)//|| keycode == KEY_D)
+	{
 		sl_walkswap(data, KEY_RIGHT);
+		data->pf = 0;
+	}
 	else if (keycode == KEY_UP && data->x > 0)// || keycode == KEY_W)
 		sl_walkswap(data, KEY_UP);
 	else if (keycode == KEY_ESC)

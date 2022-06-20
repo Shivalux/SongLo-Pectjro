@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/21 02:08:20 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:42:13 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct s_data
 	int		x;
 	int		y;
 	t_file	c[10];
+	t_file	p[20];
+	int		pf;
 }   t_data;
 
 // main functions //
