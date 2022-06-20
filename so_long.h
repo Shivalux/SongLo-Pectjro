@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/19 22:55:58 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/21 02:08:20 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define FPS 60
 # define WINDOW_HEIGHT 300
 # define WINDOW_WIDTH 600
 # define RED 0xFF0000
@@ -70,15 +71,6 @@ typedef struct s_map
 	int		y;
 }	t_map;
 
-typedef struct s_data
-{
-	void    *mlx;
-	void    *window;
-	char	**map;
-	int		x;
-	int		y;
-}   t_data;
-
 typedef struct s_file
 {
 	void	*img;
@@ -86,6 +78,16 @@ typedef struct s_file
 	int		wid;
 	int		hei;
 }	t_file;
+
+typedef struct s_data
+{
+	void    *mlx;
+	void    *window;
+	char	**map;
+	int		x;
+	int		y;
+	t_file	c[10];
+}   t_data;
 
 // main functions //
 char	**sl_read_map(char **arg);
