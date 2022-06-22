@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/21 23:42:47 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:31:46 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,27 +79,48 @@ typedef struct s_file
 	int		hei;
 }	t_file;
 
+typedef	struct s_char
+{
+	int wk;
+	int	pf;
+	int mv;
+	int	x;
+	int y;
+}
+	t_char;
+
 typedef struct s_data
 {
 	void    *mlx;
 	void    *window;
 	char	**map;
+	char	**mmap;
 	int		x;
 	int		y;
 	t_file	s[2];
+	t_file	w[2];
 	t_file	c[10];
 	t_file	p[30];
+	t_file	e[10];
+	t_file	m[30];
 	int		key;
 	int		pf;
 	int		wk;
+	t_char	*i[1];
+	t_char	*u[1000];
 }   t_data;
 
 // main functions //
 char	**sl_read_map(char **arg);
-
+char	**sl_make_mmap(char **map);
+char	**sl_make_map(char **map);
 
 // utility function
+/*check length of rts/str | 1: len of **rts | 2: len of *str | 3: ln of *str*/
 int		sl_checklen(char **rts, char *str, int mode);
+/*finding c in rts/str | mode1: find in **rts | mode2: finding *str*/
+int		sl_checkcompair(char **rts, char *str, char c, int mode);
+/*tools for **str | mode1: print **str | mode2: free **str*/
 void	twostarstools(char **str, int mode);
 
 

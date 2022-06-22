@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 01:11:46 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/19 01:12:28 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:40:43 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,59 @@ char	**sl_read_map(char **argv)
 	}
 	close(fd);
 	return (result);
+}
+
+char **sl_make_mmap(char **map)
+{
+	char	**result;
+	int		index;
+	int		xedni;
+	
+	index = 0;
+	result = (char **)ft_calloc(sizeof(char *), sl_checklen(map, NULL, 1) + 1);
+	if (result == NULL)
+	{
+		/* free  another malloc */
+		exit(0);
+	}
+	while (map[index] != NULL)
+	{
+		xedni = 0;
+		result[index] = (char *)ft_calloc(sizeof(char), sl_checklen(NULL, map[index], 2) + 1);
+		if (result[index] == NULL)
+		{
+			/* free another malloc */
+			exit(0);
+		}
+		while (map[index][xedni] != '\0')
+		{
+			if (sl_checkcompair (NULL, "PEC", map[index][xedni], 2) != 0)
+				result[index][xedni] = '0';
+			else
+				result[index][xedni] = map[index][xedni];
+			xedni++;
+		}
+		index++;
+	}
+	return (result);
+}
+
+char **sl_make_map(char **map)
+{
+	int	index;
+	int	xedni;
+
+	index = 0;
+	while (map[index] != NULL)
+	{
+		xedni = 0;
+		while (map[index][xedni] != '\0')
+		{
+			if (map[index][xedni] == 'M')
+				map[index][xedni] = '0';
+			xedni++;
+		}
+		index++;
+	}
+	return (map);
 }
