@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 22:33:04 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/22 21:17:39 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/23 05:27:13 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	sl_checkcompair(char **rts, char *str, char c, int mode)
 	{
 		while (rts[index] != NULL)
 		{
-			if (sl_checkcompair(NULL, rts[index], c, 2) != 0)
-				count += 1;//return (1);
+//			if (sl_checkcompair(NULL, rts[index], c, 2) != 0)
+				count += sl_checkcompair(NULL, rts[index], c, 2);//return (1);
 			index++;
 		}
 	}
@@ -62,13 +62,20 @@ void	sl_walking_animate(t_data *data)
 	data->wk += 1;
 }
 
+void	sl_patroling_animate(t_data *data, int count)
+{
+	return ;
+
+}
+
 
 void	sl_map_generate(t_data *data, int f)
 {
 	t_file	img1;
+	int	count;
+	int index;
 
-	
-	int index = 0;
+	index = 0;
 	img1.img = mlx_xpm_file_to_image(data->mlx, "./images/1/1.xpm", &img1.wid, &img1.hei);
 	data->s[0].img = mlx_xpm_file_to_image(data->mlx, "./images/0/01.xpm", &data->s[0].wid, &data->s[0].hei); 
 //	data->s[1].img = mlx_xpm_file_to_image(data->mlx, "./images/0/001.xpm", &data->s[1].wid, &data->s[1].hei); 
@@ -137,6 +144,16 @@ void	sl_map_generate(t_data *data, int f)
 	data->m[17].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mb8.xpm", &data->m[17].wid, &data->m[17].hei);
 	data->m[18].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mb9.xpm", &data->m[18].wid, &data->m[18].hei);
 	data->m[19].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mb0.xpm", &data->m[19].wid, &data->m[19].hei);
+	data->m[20].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mr1.xpm", &data->m[20].wid, &data->m[20].hei);
+	data->m[21].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mr2.xpm", &data->m[21].wid, &data->m[21].hei);
+	data->m[22].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mr3.xpm", &data->m[22].wid, &data->m[22].hei);
+	data->m[23].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mr4.xpm", &data->m[23].wid, &data->m[23].hei);
+	data->m[24].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mr5.xpm", &data->m[24].wid, &data->m[24].hei);
+	data->m[25].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mbr1.xpm", &data->m[25].wid, &data->m[25].hei);
+	data->m[26].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mbr2.xpm", &data->m[26].wid, &data->m[26].hei);
+	data->m[27].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mbr3.xpm", &data->m[27].wid, &data->m[27].hei);
+	data->m[28].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mbr4.xpm", &data->m[28].wid, &data->m[28].hei);
+	data->m[29].img = mlx_xpm_file_to_image(data->mlx, "./images/M/Mbr5.xpm", &data->m[29].wid, &data->m[29].hei);
 
 	mlx_clear_window(data->mlx, data->window);
 	while (data->map[index] != NULL)
@@ -183,6 +200,7 @@ void	sl_map_generate(t_data *data, int f)
 		}
 		index++;
 	}
+	count = 0;
 	index = 0;
 	while (data->mmap[index] != NULL)
 	{
@@ -191,7 +209,17 @@ void	sl_map_generate(t_data *data, int f)
 		{
 			if (data->mmap[index][xedni] == 'M')
 			{
-				mlx_put_image_to_window(data->mlx, data->window, data->m[data->pf + f].img, (xedni * 32), (index * 32));
+				data->u[count].x = index;
+				data->u[count].y = xedni;
+				if (data->wk <= 5)
+				{
+					//sl_partroling_animate(data);
+				}
+				else
+				{
+					mlx_put_image_to_window(data->mlx, data->window, data->m[data->u[count].pf + f].img, (xedni * 32), (index * 32));
+				}
+				count++;
 			}
 			xedni++;
 		}
@@ -204,7 +232,7 @@ int	sl_walkswap(t_data *data, int mode)
 {
 	char	tmp;
 
-	if (mode == KEY_UP && data->map[data->x - 1][data->y] != '1' && data->wk > 5)/* up */
+	if (mode == KEY_UP && data->map[data->x - 1][data->y] != '1')/* up */
 	{	
 		if (data->map[data->x - 1][data->y] == 'C')
 			data->map[data->x - 1][data->y] = '0';
@@ -214,7 +242,7 @@ int	sl_walkswap(t_data *data, int mode)
 		data->key = KEY_UP;
 		data->wk = 1;
 	}
-	else if (mode == KEY_LEFT && data->map[data->x][data->y - 1] != '1' && data->wk > 5)/* left */
+	else if (mode == KEY_LEFT && data->map[data->x][data->y - 1] != '1')/* left */
 	{
 		if (data->map[data->x][data->y -1] == 'C')
 			data->map[data->x][data->y -1] = '0';
@@ -224,7 +252,7 @@ int	sl_walkswap(t_data *data, int mode)
 		data->key = KEY_LEFT;
 		data->wk = 1;
 	}
-	else if (mode == KEY_DOWN && data->map[data->x + 1][data->y] != '1' && data->wk > 5)/* down */
+	else if (mode == KEY_DOWN && data->map[data->x + 1][data->y] != '1')/* down */
 	{
 		if (data->map[data->x + 1][data->y] == 'C')
 			data->map[data->x + 1][data->y] = '0';
@@ -234,7 +262,7 @@ int	sl_walkswap(t_data *data, int mode)
 		data->key = KEY_DOWN;
 		data->wk = 1;
 	}
-	else if (mode == KEY_RIGHT && data->map[data->x][data->y + 1] != '1' && data->wk > 5)/* right */
+	else if (mode == KEY_RIGHT && data->map[data->x][data->y + 1] != '1')/* right */
 	{
 		if (data->map[data->x][data->y + 1] == 'C')
 			data->map[data->x][data->y + 1] = '0';
@@ -247,6 +275,59 @@ int	sl_walkswap(t_data *data, int mode)
 	return (1);
 }
 
+int	sl_mon_patrolswap(t_data *data)
+{
+	char	tmp;
+	int		index;
+	int		fin;
+
+	index = 0;
+	srand(time(0));
+	while (index < sl_checkcompair(data->mmap, NULL, 'M', 1))//(data->u[index] == NULL)//
+	{
+		fin = 0;
+		data->u[index].mv = rand();
+		printf("index = %d, mv = %d\n", index, data->u[index].mv % 5);
+		if (data->u[index].mv % 5 == 0 && data->mmap[data->u[index].x - 1][data->u[index].y] != '1')// && data->mmap[data->u[index].x - 1][data->u[index].y] != 'M')
+		{
+			tmp = data->mmap[data->u[index].x][data->u[index].y];
+			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x - 1][data->u[index].y];
+			data->mmap[data->u[index].x - 1][data->u[index].y] = tmp;
+			fin = 1;
+		}
+		else if (data->u[index].mv % 5 == 1 && data->mmap[data->u[index].x][data->u[index].y - 1] != '1')// && data->mmap[data->u[index].x][data->u[index].y - 1] != 'M')
+		{
+			tmp = data->mmap[data->u[index].x][data->u[index].y];
+			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x][data->u[index].y - 1];
+			data->mmap[data->u[index].x][data->u[index].y - 1] = tmp;
+			data->u[index].pf = 10;
+			fin = 1;
+
+		}
+		else if (data->u[index].mv % 5 == 2 && data->mmap[data->u[index].x + 1][data->u[index].y] != '1')// && data->mmap[data->u[index].x + 1][data->u[index].y] != 'M')
+		{
+			tmp = data->mmap[data->u[index].x][data->u[index].y];
+			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x + 1][data->u[index].y];
+			data->mmap[data->u[index].x + 1][data->u[index].y] = tmp;
+			fin = 1;
+		}
+		else if (data->u[index].mv % 5 == 3 && data->mmap[data->u[index].x][data->u[index].y + 1] != '1')// && data->mmap[data->u[index].x][data->u[index].y + 1] != 'M')
+		{
+			tmp = data->mmap[data->u[index].x][data->u[index].y];
+			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x][data->u[index].y + 1];
+			data->mmap[data->u[index].x][data->u[index].y + 1] = tmp;
+			data->u[index].pf = 0;
+			fin = 1;
+
+		}
+		else if (data->u[index].mv % 5 == 4)
+			fin = 1;
+		if (fin == 1)
+			index++;
+	}
+	return (1);
+}
+
 int	sl_keyinput(int keycode, t_data *data)
 {
 	static int	count = 0;
@@ -254,23 +335,29 @@ int	sl_keyinput(int keycode, t_data *data)
 	if (keycode == KEY_LEFT && data->y > 0 && data->wk > 5)// || keycode == KEY_A)
 	{
 		count += sl_walkswap(data, KEY_LEFT);
+		sl_mon_patrolswap(data);
 		data->pf = 10;
 		printf("movement count == %d\n", count);
+		twostarstools(data->map, 1);
+		twostarstools(data->mmap, 1);
 	}
 	else if (keycode == KEY_DOWN && data->x < sl_checklen(data->map, NULL, 1) - 1 && data->wk > 5)//|| keycode == KEY_S)
 	{
 		count += sl_walkswap(data, KEY_DOWN);
+		sl_mon_patrolswap(data);
 		printf("movement count == %d\n", count);
 	}
 	else if (keycode == KEY_RIGHT && data->y < sl_checklen(NULL, data->map[0], 2) - 1 && data->wk > 5)//|| keycode == KEY_D)
 	{
 		count += sl_walkswap(data, KEY_RIGHT);
+		sl_mon_patrolswap(data);
 		data->pf = 0;
 		printf("movement count == %d\n", count);
 	}
 	else if (keycode == KEY_UP && data->x > 0 && data->wk > 5)// || keycode == KEY_W)
 	{ 
 		count += sl_walkswap(data, KEY_UP);
+		sl_mon_patrolswap(data);
 		printf("movement count == %d\n", count);
 	}
 	else if (keycode == KEY_ESC)
@@ -304,7 +391,6 @@ int	sl_animating(t_data *data)
 	if (count % 1111 == 0)
 	{
 		sl_map_generate(data, count / 1111);
-		//mlx_put_image_to_window(data->mlx, data->c[count / 11];
 	}
 	count = count + 1;
 
@@ -372,31 +458,36 @@ int	main(int argc, char **argv)
 		return (0);
 	data->wk = 6;
 	data->map = sl_read_map(argv);
+	twostarstools(data->map, 1);
 	data->mmap = sl_make_mmap(data->map);
 	data->map = sl_make_map(data->map);
 
+	printf("count M = %d\n", sl_checkcompair(data->mmap, NULL, 'M', 1));
+/*	data->u = (t_char*)malloc(sizeof(t_char) + sl_checkcompair(data->mmap, NULL, 'M', 1));
+	if (data->u == NULL)
+	{
+		//free another things//
+		return (0);
+	}*/
 
-
-
-	data->mlx = mlx_init();
 
 	
 	int width = 32 * sl_checklen(NULL, data->map[0], 2);
 	int height = 32 * sl_checklen(data->map, NULL, 1);
 	
-
+	data->mlx = mlx_init();
 	data->window = mlx_new_window(data->mlx, width, height, "so_long");
 	mlx_hook(data->window, 17, 0, sl_close, data);
 	mlx_hook(data->window, 2, 1L<<2,  sl_p_moving, data);
 //	mlx_hook(data->window, 3, 1L<<1,  sl_keyinput, data);
 	mlx_key_hook(data->window, sl_keyinput, data);
 	sl_map_generate(data, 0);
+	printf("Hello\n");
 
 
 	mlx_loop_hook(data->mlx, sl_animating, data);
 	
 
-	twostarstools(data->map, 1);
 	mlx_loop(data->mlx);
 	twostarstools(data->map, 0);
 	free(data);

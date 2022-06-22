@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/22 20:31:46 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/23 05:27:18 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <time.h>
 
 # define FPS 60
 # define WINDOW_HEIGHT 300
@@ -106,8 +107,8 @@ typedef struct s_data
 	int		key;
 	int		pf;
 	int		wk;
-	t_char	*i[1];
-	t_char	*u[1000];
+	t_char	i[1];
+	t_char	u[1000];
 }   t_data;
 
 // main functions //
