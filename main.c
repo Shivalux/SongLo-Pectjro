@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 22:33:04 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/23 05:27:13 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/23 06:10:40 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,21 @@ void	sl_walking_animate(t_data *data)
 		mlx_put_image_to_window(data->mlx, data->window, data->p[19 + data->wk].img, ((data->y - 1) * 32) + (6 * data->wk), data->x * 32);
 	else if (data->key == KEY_UP)
 		mlx_put_image_to_window(data->mlx, data->window, data->p[(19 + (data->pf / 2)) + data->wk].img, data->y * 32, ((data->x + 1) * 32) - (6 * data->wk));
-	data->wk += 1;
+	if (sl_checkcompair(data->mmap, NULL, 'M', 1) == 0)
+		data->wk += 1;
 }
 
-void	sl_patroling_animate(t_data *data, int count)
+void	sl_patroling_animate(t_data *data, int index, int f)
 {
-	return ;
-
+		if (data->u[index].mv == 1)
+			mlx_put_image_to_window(data->mlx, data->window, data->m[24 + data->wk].img, ((data->u[index].y + 1) * 32) - (6 * data->wk), data->u[index].x * 32);
+		else if (data->u[index].mv == 2)
+			mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->pf / 2)) + data->wk].img, data->u[index].y * 32, ((data->u[index].x - 1) * 32) + (6 * data->wk));
+		else if (data->u[index].mv == 3)
+			mlx_put_image_to_window(data->mlx, data->window, data->m[19 + data->wk].img, ((data->u[index].y - 1) * 32) + (6 * data->wk), data->u[index].x * 32);
+		else if (data->u[index].mv == 0)
+			mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->pf / 2)) + data->wk].img, data->u[index].y * 32, ((data->u[index].x + 1) * 32) - (6 * data->wk));
+	data->wk += 1;
 }
 
 
@@ -211,9 +219,10 @@ void	sl_map_generate(t_data *data, int f)
 			{
 				data->u[count].x = index;
 				data->u[count].y = xedni;
-				if (data->wk <= 5)
+				if (data->wk <= 5 && data->u[count].mv != 4)
 				{
-					//sl_partroling_animate(data);
+					printf("x= %d, y =%d, count = %d, wk =%d\n", data->u[count].x, data->u[count].y, count, data->wk);
+					sl_patroling_animate(data, count, f);
 				}
 				else
 				{
@@ -286,16 +295,16 @@ int	sl_mon_patrolswap(t_data *data)
 	while (index < sl_checkcompair(data->mmap, NULL, 'M', 1))//(data->u[index] == NULL)//
 	{
 		fin = 0;
-		data->u[index].mv = rand();
+		data->u[index].mv = rand() % 5;
 		printf("index = %d, mv = %d\n", index, data->u[index].mv % 5);
-		if (data->u[index].mv % 5 == 0 && data->mmap[data->u[index].x - 1][data->u[index].y] != '1')// && data->mmap[data->u[index].x - 1][data->u[index].y] != 'M')
+		if (data->u[index].mv == 0 && data->mmap[data->u[index].x - 1][data->u[index].y] != '1')// && data->mmap[data->u[index].x - 1][data->u[index].y] != 'M')
 		{
 			tmp = data->mmap[data->u[index].x][data->u[index].y];
 			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x - 1][data->u[index].y];
 			data->mmap[data->u[index].x - 1][data->u[index].y] = tmp;
 			fin = 1;
 		}
-		else if (data->u[index].mv % 5 == 1 && data->mmap[data->u[index].x][data->u[index].y - 1] != '1')// && data->mmap[data->u[index].x][data->u[index].y - 1] != 'M')
+		else if (data->u[index].mv == 1 && data->mmap[data->u[index].x][data->u[index].y - 1] != '1')// && data->mmap[data->u[index].x][data->u[index].y - 1] != 'M')
 		{
 			tmp = data->mmap[data->u[index].x][data->u[index].y];
 			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x][data->u[index].y - 1];
@@ -304,14 +313,14 @@ int	sl_mon_patrolswap(t_data *data)
 			fin = 1;
 
 		}
-		else if (data->u[index].mv % 5 == 2 && data->mmap[data->u[index].x + 1][data->u[index].y] != '1')// && data->mmap[data->u[index].x + 1][data->u[index].y] != 'M')
+		else if (data->u[index].mv == 2 && data->mmap[data->u[index].x + 1][data->u[index].y] != '1')// && data->mmap[data->u[index].x + 1][data->u[index].y] != 'M')
 		{
 			tmp = data->mmap[data->u[index].x][data->u[index].y];
 			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x + 1][data->u[index].y];
 			data->mmap[data->u[index].x + 1][data->u[index].y] = tmp;
 			fin = 1;
 		}
-		else if (data->u[index].mv % 5 == 3 && data->mmap[data->u[index].x][data->u[index].y + 1] != '1')// && data->mmap[data->u[index].x][data->u[index].y + 1] != 'M')
+		else if (data->u[index].mv == 3 && data->mmap[data->u[index].x][data->u[index].y + 1] != '1')// && data->mmap[data->u[index].x][data->u[index].y + 1] != 'M')
 		{
 			tmp = data->mmap[data->u[index].x][data->u[index].y];
 			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x][data->u[index].y + 1];
@@ -320,8 +329,9 @@ int	sl_mon_patrolswap(t_data *data)
 			fin = 1;
 
 		}
-		else if (data->u[index].mv % 5 == 4)
+		else if (data->u[index].mv == 4)
 			fin = 1;
+		printf("|||mv = %d\n", data->u[index].mv);
 		if (fin == 1)
 			index++;
 	}
