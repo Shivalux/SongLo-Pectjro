@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/23 05:27:18 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/24 01:16:27 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_file
 
 typedef	struct s_char
 {
-	int wk;
+	int no;
 	int	pf;
 	int mv;
 	int	x;
