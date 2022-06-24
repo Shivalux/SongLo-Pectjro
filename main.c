@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 22:33:04 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/24 14:51:43 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/25 05:40:33 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	sl_walking_animate(t_data *data)
 	data->wk += 1;
 }
 
-void	sl_patroling_animate(t_data *data, int no, int index)
+void	sl_patroling_animate(t_data *data, int index, int xedni)
 {
 /*	if (data->u[data->u[index].no].mv == 1)
 		mlx_put_image_to_window(data->mlx, data->window, data->m[24 + data->wk].img, ((data->u[data->u[index].no].y + 1) * 32) - (6 * data->wk), data->u[data->u[index].no].x * 32);
@@ -73,7 +73,7 @@ void	sl_patroling_animate(t_data *data, int no, int index)
 	else if (data->u[data->u[index].no].mv == 0)
 		mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->u[data->u[index].no].pf / 2)) + data->wk].img, data->u[data->u[index].no].y * 32, ((data->u[data->u[index].no].x + 1) * 32) - (6 * data->wk));
 */
-	printf("index = %d, no= %d\n", index, data->u[index].no);
+//	printf("index = %d, no= %d\n", index, data->u[index][xedni].no);
 /*	if (data->u[index].mv == 1)
 		mlx_put_image_to_window(data->mlx, data->window, data->m[24 + data->wk].img, ((data->u[index].y + 1) * 32) - (6 * data->wk), data->u[index].x * 32);
 	else if (data->u[index].mv == 2)
@@ -83,17 +83,25 @@ void	sl_patroling_animate(t_data *data, int no, int index)
 	else if (data->u[index].mv == 0)
 		mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->u[index].pf / 2)) + data->wk].img, data->u[index].y * 32, ((data->u[index].x + 1) * 32) - (6 * data->wk));
 */
-
-	if (data->u[no].mv == 1)
-		mlx_put_image_to_window(data->mlx, data->window, data->m[24 + data->wk].img, ((data->u[no].y + 1) * 32) - (6 * data->wk), data->u[no].x * 32);
-	else if (data->u[no].mv == 2)
-		mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->u[no].pf / 2)) + data->wk].img, data->u[no].y * 32, ((data->u[no].x - 1) * 32) + (6 * data->wk));
-	else if (data->u[no].mv == 3)
-		mlx_put_image_to_window(data->mlx, data->window, data->m[19 + data->wk].img, ((data->u[no].y - 1) * 32) + (6 * data->wk), data->u[no].x * 32);
-	else if (data->u[no].mv == 0)
-		mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->u[no].pf / 2)) + data->wk].img, data->u[no].y * 32, ((data->u[no].x + 1) * 32) - (6 * data->wk));
+	if (data->u[index][xedni].mv == 1)
+	{
+		mlx_put_image_to_window(data->mlx, data->window, data->m[24 + data->wk].img, ((data->u[index][xedni].y + 1) * 32) - (6 * data->wk), data->u[index][xedni].x * 32);
+	}
+	else if (data->u[index][xedni].mv == 2)
+	{
+		mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->u[index][xedni].pf / 2)) + data->wk].img, data->u[index][xedni].y * 32, ((data->u[index][xedni].x - 1) * 32) + (6 * data->wk));
+	}
+	else if (data->u[index][xedni].mv == 3)
+	{
+		mlx_put_image_to_window(data->mlx, data->window, data->m[19 + data->wk].img, ((data->u[index][xedni].y - 1) * 32) + (6 * data->wk), data->u[index][xedni].x * 32);
+	}
+	else if (data->u[index][xedni].mv == 0)
+	{
+		mlx_put_image_to_window(data->mlx, data->window, data->m[(19 + (data->u[index][xedni].pf / 2)) + data->wk].img, data->u[index][xedni].y * 32, ((data->u[index][xedni].x + 1) * 32) - (6 * data->wk));
+	}
 }
 
+/*
 int		sl_checkposition_compair(t_data *data, t_char u)
 {
 	int	index;
@@ -102,7 +110,7 @@ int		sl_checkposition_compair(t_data *data, t_char u)
 	while (index < sl_checkcompair(data->mmap, NULL, 'M', 1))
 	{
 		if (data->wk <= 5)
-			printf("index = %d no = %d|data->x =%d u.x = %d || data->y = %d u.y = %d\n", index, data->u[index].no, data->u[index].x, u.x, data->u[index].y, u.y);
+	//		printf("index = %d no = %d|data->x =%d u.x = %d || data->y = %d u.y = %d\n", index, data->u[index].no, data->u[index].x, u.x, data->u[index].y, u.y);
 		if(data->u[index].x == u.x && data->u[index].y == u.y)
 		{
 			return (index);
@@ -110,7 +118,7 @@ int		sl_checkposition_compair(t_data *data, t_char u)
 		index++;
 	}
 	return (-1);
-}
+}*/
 
 void	sl_map_generate(t_data *data, int f)
 {
@@ -253,23 +261,20 @@ void	sl_map_generate(t_data *data, int f)
 		{
 			if (data->mmap[index][xedni] == 'M')
 			{
-				tnuoc = sl_checkposition_compair(data, data->u[count]);
-				if (data->wk <= 5)
-					printf("count = %d, tnuoc = %d\n", count, tnuoc);
-		//		data->u[data->u[tnuoc].no].x = index;
-		//		data->u[data->u[tnuoc].no].y = xedni;
-				//data->u[count].x = index;
-				//data->u[count].y = xedni;
-				if (data->wk <= 5 && data->u[data->u[tnuoc].no].mv != 4)
+				data->u[index][xedni].x = index;
+				data->u[index][xedni].y = xedni;
+		//		tnuoc = sl_checkposition_compair(data, data->u[count]);
+				if (data->wk <= 5 && data->u[index][xedni].mv != 4)
 				{
-					sl_patroling_animate(data, count, data->u[tnuoc].no);
+					sl_patroling_animate(data, index, xedni);
 				}
 				else
 				{
-					mlx_put_image_to_window(data->mlx, data->window, data->m[data->u[count].pf + f].img, (xedni * 32), (index * 32));
+				//	printf("data->u[%d][%d].x = %d, y =%d, pf = %d\n", index, xedni, data->u[index][xedni].x, data->u[index][xedni].y, data->u[index][xedni].pf);
+					mlx_put_image_to_window(data->mlx, data->window, data->m[data->u[index][xedni].pf + f].img, (xedni * 32), (index * 32));
+					//mlx_put_image_to_window(data->mlx, data->window, data->m[data->u[index][xedni].pf + f].img, (xedni * 32), (index * 32));
 				}
-				data->u[data->u[tnuoc].no].x = index;
-				data->u[data->u[tnuoc].no].y = xedni;
+				data->u[index][xedni].k = 0;
 				count++;
 			}
 			xedni++;
@@ -330,50 +335,68 @@ int	sl_mon_patrolswap(t_data *data)
 {
 	char	tmp;
 	int		index;
+	int		xedni;
 	int		fin;
 
+	fin = 1;
 	index = 0;
 	srand(time(0));
-	while (index < sl_checkcompair(data->mmap, NULL, 'M', 1))//(data->u[index] == NULL)//
+	while (index < sl_checklen(data->mmap, NULL, 1))//(data->u[index] == NULL)//
 	{
-		fin = 0;
-		data->u[index].mv = rand() % 5;
-		if (data->u[index].mv == 0 && data->mmap[data->u[index].x - 1][data->u[index].y] != '1' && data->mmap[data->u[index].x - 1][data->u[index].y] != 'M')
+		xedni = 0;
+		while(xedni < sl_checklen(NULL, data->mmap[index], 2))
 		{
-			tmp = data->mmap[data->u[index].x][data->u[index].y];
-			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x - 1][data->u[index].y];
-			data->mmap[data->u[index].x - 1][data->u[index].y] = tmp;
-			fin = 1;
+			if (data->mmap[index][xedni] == 'M' && data->u[index][xedni].k != 1)
+			{
+				fin = 0;
+				data->u[index][xedni].mv = rand() % 5;
+				if (data->u[index][xedni].mv == 0 && data->mmap[data->u[index][xedni].x - 1][data->u[index][xedni].y] != '1' && data->mmap[data->u[index][xedni].x - 1][data->u[index][xedni].y] != 'M' && data->u[index][xedni].k == 0)
+				{
+					tmp = data->mmap[data->u[index][xedni].x][data->u[index][xedni].y];
+					data->mmap[data->u[index][xedni].x][data->u[index][xedni].y] = data->mmap[data->u[index][xedni].x - 1][data->u[index][xedni].y];
+					data->mmap[data->u[index][xedni].x - 1][data->u[index][xedni].y] = tmp;
+					data->u[data->u[index][xedni].x - 1][data->u[index][xedni].y].pf = data->u[index][xedni].pf;
+					data->u[data->u[index][xedni].x - 1][data->u[index][xedni].y].mv = data->u[index][xedni].mv;
+					data->u[data->u[index][xedni].x - 1][data->u[index][xedni].y].k = 1;
+					fin = 1;
+				}
+				else if (data->u[index][xedni].mv == 1 && data->mmap[data->u[index][xedni].x][data->u[index][xedni].y - 1] != '1' && data->mmap[data->u[index][xedni].x][data->u[index][xedni].y - 1] != 'M' && data->u[index][xedni].k == 0)
+				{
+					tmp = data->mmap[data->u[index][xedni].x][data->u[index][xedni].y];
+					data->mmap[data->u[index][xedni].x][data->u[index][xedni].y] = data->mmap[data->u[index][xedni].x][data->u[index][xedni].y - 1];
+					data->mmap[data->u[index][xedni].x][data->u[index][xedni].y - 1] = tmp;
+					data->u[data->u[index][xedni].x][data->u[index][xedni].y - 1].pf = 10;
+					data->u[data->u[index][xedni].x][data->u[index][xedni].y - 1].mv = data->u[index][xedni].mv;
+					data->u[data->u[index][xedni].x][data->u[index][xedni].y - 1].k = 1;
+					fin = 1;
+				}
+				else if (data->u[index][xedni].mv == 2 && data->mmap[data->u[index][xedni].x + 1][data->u[index][xedni].y] != '1' && data->mmap[data->u[index][xedni].x + 1][data->u[index][xedni].y] != 'M' && data->u[index][xedni].k == 0)
+				{
+					tmp = data->mmap[data->u[index][xedni].x][data->u[index][xedni].y];
+					data->mmap[data->u[index][xedni].x][data->u[index][xedni].y] = data->mmap[data->u[index][xedni].x + 1][data->u[index][xedni].y];
+					data->mmap[data->u[index][xedni].x + 1][data->u[index][xedni].y] = tmp;
+					data->u[data->u[index][xedni].x + 1][data->u[index][xedni].y].pf = data->u[index][xedni].pf;
+					data->u[data->u[index][xedni].x + 1][data->u[index][xedni].y].mv = data->u[index][xedni].mv;
+					data->u[data->u[index][xedni].x + 1][data->u[index][xedni].y].k = 1;
+					fin = 1;
+				}
+				else if (data->u[index][xedni].mv == 3 && data->mmap[data->u[index][xedni].x][data->u[index][xedni].y + 1] != '1' && data->mmap[data->u[index][xedni].x][data->u[index][xedni].y + 1] != 'M' && data->u[index][xedni].k == 0)
+				{
+					tmp = data->mmap[data->u[index][xedni].x][data->u[index][xedni].y];
+					data->mmap[data->u[index][xedni].x][data->u[index][xedni].y] = data->mmap[data->u[index][xedni].x][data->u[index][xedni].y + 1];
+					data->mmap[data->u[index][xedni].x][data->u[index][xedni].y + 1] = tmp;
+					data->u[data->u[index][xedni].x][data->u[index][xedni].y + 1].pf = 0;
+					data->u[data->u[index][xedni].x][data->u[index][xedni].y + 1].mv = data->u[index][xedni].mv;
+					data->u[data->u[index][xedni].x][data->u[index][xedni].y + 1].k = 1;
+					fin = 1;
+				}
+				else if (data->u[index][xedni].mv == 4 && data->u[index][xedni].k == 0)
+					fin = 1;
+			}
+			if (fin == 1)
+				xedni++;
 		}
-		else if (data->u[index].mv == 1 && data->mmap[data->u[index].x][data->u[index].y - 1] != '1' && data->mmap[data->u[index].x][data->u[index].y - 1] != 'M')
-		{
-			tmp = data->mmap[data->u[index].x][data->u[index].y];
-			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x][data->u[index].y - 1];
-			data->mmap[data->u[index].x][data->u[index].y - 1] = tmp;
-			data->u[index].pf = 10;
-			fin = 1;
-
-		}
-		else if (data->u[index].mv == 2 && data->mmap[data->u[index].x + 1][data->u[index].y] != '1' && data->mmap[data->u[index].x + 1][data->u[index].y] != 'M')
-		{
-			tmp = data->mmap[data->u[index].x][data->u[index].y];
-			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x + 1][data->u[index].y];
-			data->mmap[data->u[index].x + 1][data->u[index].y] = tmp;
-			fin = 1;
-		}
-		else if (data->u[index].mv == 3 && data->mmap[data->u[index].x][data->u[index].y + 1] != '1' && data->mmap[data->u[index].x][data->u[index].y + 1] != 'M')
-		{
-			tmp = data->mmap[data->u[index].x][data->u[index].y];
-			data->mmap[data->u[index].x][data->u[index].y] = data->mmap[data->u[index].x][data->u[index].y + 1];
-			data->mmap[data->u[index].x][data->u[index].y + 1] = tmp;
-			data->u[index].pf = 0;
-			fin = 1;
-
-		}
-		else if (data->u[index].mv == 4)
-			fin = 1;
-		if (fin == 1)
-			index++;
+		index++;
 	}
 /*	while (index < sl_checkcompair(data->mmap, NULL, 'M', 1))//(data->u[index] == NULL)//
 	{
@@ -423,27 +446,27 @@ int	sl_keyinput(int keycode, t_data *data)
 {
 	static int	count = 0;
 
-	if (keycode == KEY_LEFT && data->y > 0 && data->wk > 5)// || keycode == KEY_A)
+	if (keycode == KEY_LEFT && data->y > 0 && data->wk > 5 && data->map[data->x][data->y - 1] != '1')// || keycode == KEY_A)
 	{
 		count += sl_walkswap(data, KEY_LEFT);
 		sl_mon_patrolswap(data);
 		data->pf = 10;
 		printf("movement count == %d\n", count);
 	}
-	else if (keycode == KEY_DOWN && data->x < sl_checklen(data->map, NULL, 1) - 1 && data->wk > 5)//|| keycode == KEY_S)
+	else if (keycode == KEY_DOWN && data->x < sl_checklen(data->map, NULL, 1) - 1 && data->wk > 5 && data->map[data->x + 1][data->y] != '1')//|| keycode == KEY_S)
 	{
 		count += sl_walkswap(data, KEY_DOWN);
 		sl_mon_patrolswap(data);
 		printf("movement count == %d\n", count);
 	}
-	else if (keycode == KEY_RIGHT && data->y < sl_checklen(NULL, data->map[0], 2) - 1 && data->wk > 5)//|| keycode == KEY_D)
+	else if (keycode == KEY_RIGHT && data->y < sl_checklen(NULL, data->map[0], 2) - 1 && data->wk > 5 && data->map[data->x][data->y + 1] != '1')//|| keycode == KEY_D)
 	{
 		count += sl_walkswap(data, KEY_RIGHT);
 		sl_mon_patrolswap(data);
 		data->pf = 0;
 		printf("movement count == %d\n", count);
 	}
-	else if (keycode == KEY_UP && data->x > 0 && data->wk > 5)// || keycode == KEY_W)
+	else if (keycode == KEY_UP && data->x > 0 && data->wk > 5 && data->map[data->x - 1][data->y] != '1')// || keycode == KEY_W)
 	{ 
 		count += sl_walkswap(data, KEY_UP);
 		sl_mon_patrolswap(data);
@@ -453,7 +476,7 @@ int	sl_keyinput(int keycode, t_data *data)
 	{
 		mlx_destroy_window(data->mlx, data->window);
 		// destroy images //
-		twostarstools(data->map, 0);
+	//	twostarstools(data->map, 0);
 		free(data);
 		printf("END FUNCTION\n");
 		exit(0);
@@ -465,7 +488,7 @@ int	sl_keyinput(int keycode, t_data *data)
 int	sl_close(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->window);
-	twostarstools(data->map, 0);
+//	twostarstools(data->map, 0);
 	free(data);
 	exit(0);
 	return (0);
@@ -475,15 +498,21 @@ int	sl_animating(t_data *data)
 {
 	static int	count = 0;
 
-	if (count >= 11109)
+	if (count >= 7999)
+		count = 0;
+	if (count % 800 == 0)
+	{
+		sl_map_generate(data, count / 800);
+	}
+	count = count + 1;
+/*	if (count >= 11109)
 		count = 0;
 	if (count % 1111 == 0)
 	{
 		sl_map_generate(data, count / 1111);
 	}
 	count = count + 1;
-
-	return (0);
+*/	return (0);
 }
 
 int sl_p_moving(int key, t_data *data)
@@ -533,30 +562,6 @@ int sl_p_moving(int key, t_data *data)
 	return (0);
 }*/
 
-void	sl_putmon_number(t_data *data)
-{
-	int	index;
-	int	xedni;
-	int number;
-
-	number = 0;
-	index = 0;
-	while (data->mmap[index] != NULL)
-	{
-		xedni = 0;
-		while (data->mmap[index][xedni] != '\0')
-		{
-			if (data->mmap[index][xedni] == 'M')
-			{	
-				data->u[number].no = number; 
-				number++;
-			}
-			xedni++;
-		}
-		index++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_data *data;
@@ -566,26 +571,51 @@ int	main(int argc, char **argv)
 		write(1, "WRONG ARGUMENT\n", 15);
 		return (0);
 	}
-	data = (t_data *)malloc(sizeof(t_data));
+	data = (t_data *)ft_calloc(sizeof(t_data), 1);
 	if (data == NULL)
 		return (0);
 	data->wk = 6;
 	data->map = sl_read_map(argv);
-	twostarstools(data->map, 1);
+	twostarstools((void *)data->map, 1);
 	data->mmap = sl_make_mmap(data->map);
+	twostarstools((void *)data->map, 1);
 	data->map = sl_make_map(data->map);
-	sl_putmon_number(data);
+	twostarstools((void *)data->mmap, 1);
+	
+
+
+
+
 
 	printf("count M = %d\n", sl_checkcompair(data->mmap, NULL, 'M', 1));
-/*	data->u = (t_char*)malloc(sizeof(t_char) + sl_checkcompair(data->mmap, NULL, 'M', 1));
+	printf("map len = %d\n", sl_checklen(data->map, NULL, 1));
+//	data->u = (t_char**)malloc(sizeof(t_char*) + sl_checkcompair(data->mmap, NULL, 'M', 1));
+	data->u = (t_char**)ft_calloc(sizeof(t_char*), sl_checklen(data->mmap, NULL, 1));
 	if (data->u == NULL)
 	{
 		//free another things//
 		return (0);
-	}*/
-
-
+	}
+	int index = 0;
+	while (index < sl_checklen(data->mmap, NULL, 1))
+	{
+		printf("mmap len = %d\n", sl_checklen(NULL, data->mmap[index], 2));
+		data->u[index] = (t_char*)ft_calloc(sizeof(t_char), sl_checklen(NULL, data->mmap[index], 2));
+		if (data->u[index] == NULL)
+		{
+			//free another things//
+			return(0);
+		}
+		index++;
+	}
 	
+
+
+
+
+
+
+
 	int width = 32 * sl_checklen(NULL, data->map[0], 2);
 	int height = 32 * sl_checklen(data->map, NULL, 1);
 	
@@ -602,7 +632,9 @@ int	main(int argc, char **argv)
 	
 
 	mlx_loop(data->mlx);
-	twostarstools(data->map, 0);
+	twostarstools((void *)data->map, 0);
+	twostarstools((void *)data->mmap, 0);
+	twostarstools((void *)data->u, 0);
 	free(data);
 	return (0);
 }

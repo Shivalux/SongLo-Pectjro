@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/24 01:16:27 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/25 05:40:36 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_file
 
 typedef	struct s_char
 {
-	int no;
+	int k;
 	int	pf;
 	int mv;
 	int	x;
@@ -108,7 +108,7 @@ typedef struct s_data
 	int		pf;
 	int		wk;
 	t_char	i[1];
-	t_char	u[1000];
+	t_char	**u;
 }   t_data;
 
 // main functions //
@@ -122,7 +122,7 @@ int		sl_checklen(char **rts, char *str, int mode);
 /*finding c in rts/str | mode1: find in **rts | mode2: finding *str*/
 int		sl_checkcompair(char **rts, char *str, char c, int mode);
 /*tools for **str | mode1: print **str | mode2: free **str*/
-void	twostarstools(char **str, int mode);
+void	twostarstools(void **str, int mode);
 
 
 int	create_colour(int t, int r, int g, int b);

@@ -32,7 +32,7 @@ int	sl_checklen(char **rts, char *str, int mode)
 
     /* tools function for char ** */
         /* mode1 = print value char ** | mode0 = free char ** */
-void twostarstools(char **str, int mode)
+void twostarstools(void **str, int mode)
 {
 	int	count;
 
@@ -44,8 +44,8 @@ void twostarstools(char **str, int mode)
 	}
 	else if (mode == 1)
 	{
-		while (str[count] != NULL)
-			printf("%s\n", str[count++]);
+		while ((char *)str[count] != NULL)
+			printf("%s\n", (char *)str[count++]);
 		return ;
 	}
 	else if (mode == 0)
