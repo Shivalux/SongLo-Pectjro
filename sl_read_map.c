@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/19 01:11:46 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/24 22:04:27 by sharnvon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "so_long.h"
 #include "./getnextline/get_next_line.h"
 #include "./libft/libft.h"
@@ -22,7 +10,7 @@ char	**sl_join_map(char **rts, char *str)
 
 	index = 0;
 	if (str == NULL)
-		return (0);
+		return (rts);
 	if (rts == NULL)
 		result = (char **)ft_calloc(sizeof(char *), 2);
 	else
@@ -56,7 +44,7 @@ char	**sl_join_map(char **rts, char *str)
 		exit(0);
 	}
 	xedni = 0;
-	while (str[xedni] != '\0')
+	while (str[xedni] != '\0' && str[xedni] != '\n')
 	{
 		result[index][xedni] = str[xedni];
 		xedni++;
@@ -84,13 +72,15 @@ char	**sl_read_map(char **argv)
 	index = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		exit(0);
+		return (0);
 	while (0 < 1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
 		result = sl_join_map(result, line);
+		if (result == NULL)
+			break ;
 	}
 	close(fd);
 	return (result);
@@ -120,7 +110,7 @@ char **sl_make_mmap(char **map)
 		}
 		while (map[index][xedni] != '\0')
 		{
-			if (sl_checkcompair (NULL, "PEC", map[index][xedni], 2) != 0)
+			if (sl_checkcompair (NULL, "PC", map[index][xedni], 2) != 0)
 				result[index][xedni] = '0';
 			else
 				result[index][xedni] = map[index][xedni];

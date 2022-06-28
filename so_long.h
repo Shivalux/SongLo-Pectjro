@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/25 05:40:36 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/28 05:57:38 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
-# define KEY_W 19
+# define KEY_W 13
 # define KEY_U 32
 # define KEY_I 34
 # define KEY_O 31
@@ -85,6 +85,7 @@ typedef	struct s_char
 	int k;
 	int	pf;
 	int mv;
+	int	kil;
 	int	x;
 	int y;
 }
@@ -98,12 +99,13 @@ typedef struct s_data
 	char	**mmap;
 	int		x;
 	int		y;
+	int		end;
 	t_file	s[2];
 	t_file	w[2];
 	t_file	c[10];
-	t_file	p[30];
+	t_file	p[45];
 	t_file	e[10];
-	t_file	m[30];
+	t_file	m[40];
 	int		key;
 	int		pf;
 	int		wk;
@@ -115,6 +117,7 @@ typedef struct s_data
 char	**sl_read_map(char **arg);
 char	**sl_make_mmap(char **map);
 char	**sl_make_map(char **map);
+void	sl_checkmap_misconfig(t_data *data);
 
 // utility function
 /*check length of rts/str | 1: len of **rts | 2: len of *str | 3: ln of *str*/
