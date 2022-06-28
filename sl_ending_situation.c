@@ -10,10 +10,7 @@ void	sl_ending_screen(t_data *data, int f)
 	{
 		mlx_put_image_to_window(data->mlx, data->window, data->e[5].img, data->y * 32, data->x * 32);
 		if (data->wk <= 5)
-		{
-			printf("HHHHHHHHHHHHWK\n");
 			sl_walking_animate(data);
-		}
 		else
 			mlx_put_image_to_window(data->mlx, data->window, data->p[40 + (f % 5)].img, data->y * 32, data->x * 32);
 		if (data->wk == 5)

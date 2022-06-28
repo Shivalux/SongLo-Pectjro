@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sl_read_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/28 11:34:56 by sharnvon          #+#    #+#             */
+/*   Updated: 2022/06/28 11:45:59 by sharnvon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "./getnextline/get_next_line.h"
 #include "./libft/libft.h"
@@ -123,8 +135,9 @@ char **sl_make_mmap(char **map)
 
 char **sl_make_map(char **map)
 {
-	int	index;
-	int	xedni;
+	int		index;
+	int		xedni;
+	char	*extra;
 
 	index = 0;
 	while (map[index] != NULL)
@@ -138,5 +151,16 @@ char **sl_make_map(char **map)
 		}
 		index++;
 	}
+	extra = (char *)ft_calloc(sizeof(char), sl_checklen(NULL, map[0], 2) + 1);
+	if (extra == NULL)
+		//free//
+		return (0);
+	while (--index >= 0)
+	{
+		printf("index= %d\n", index);
+		extra[index] = '1';
+	}
+	printf("extra= %s\n", extra);
+	map = sl_join_map(map, extra);
 	return (map);
 }

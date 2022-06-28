@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/28 05:57:38 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/29 01:06:53 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,14 @@ typedef struct s_data
 	int		x;
 	int		y;
 	int		end;
-	t_file	s[2];
-	t_file	w[2];
+	t_file	s[1];
+	t_file	w[1];
 	t_file	c[10];
 	t_file	p[45];
 	t_file	e[10];
 	t_file	m[40];
+	t_file	n[15];
+	int		mc;
 	int		key;
 	int		pf;
 	int		wk;
