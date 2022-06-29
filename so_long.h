@@ -6,71 +6,27 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/29 01:06:53 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/29 01:19:43 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx/mlx.h"
-//# include "libft/libft.h"
-//# include "libftprintf/libftprintf.h"
-//# include "getnextline/gitnextline.h"
+# include "./mlx/mlx.h"
+# include "./libftprintf/libftprintf.h"
+# include "./getnextline/get_next_line.h"
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <time.h>
 
-# define FPS 60
-# define WINDOW_HEIGHT 300
-# define WINDOW_WIDTH 600
-# define RED 0xFF0000
-# define GREEN 0xFF00
-# define BULE 0xFF
-# define WHITE 0xFFFFFF
-
-/* key define */
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_DOWN 125
-# define KEY_UP 126
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_W 13
-# define KEY_U 32
-# define KEY_I 34
-# define KEY_O 31
-# define KEY_SPACE 49
 # define KEY_ESC 53
-
-typedef struct s_rect
-{
-	int x;
-	int y;
-	int width;
-	int height;
-	int color;
-}   t_rect;
- 
-typedef struct s_img
-{
-	void    *img;
-	char    *addr;
-	int     bpp;
-	int     line_length;
-	int     ending;
-}   t_img;
-
-typedef struct s_map
-{
-	char	**map;
-	int		x;
-	int		y;
-}	t_map;
 
 typedef struct s_file
 {
@@ -104,7 +60,7 @@ typedef struct s_data
 	t_file	w[1];
 	t_file	c[10];
 	t_file	p[45];
-	t_file	e[10];
+	t_file	e[6];
 	t_file	m[40];
 	t_file	n[15];
 	int		mc;
@@ -115,24 +71,65 @@ typedef struct s_data
 	t_char	**u;
 }   t_data;
 
-// main functions //
 char	**sl_read_map(char **arg);
 char	**sl_make_mmap(char **map);
 char	**sl_make_map(char **map);
+char	**sl_join_map(char **rts, char *str);
 void	sl_checkmap_misconfig(t_data *data);
-
-// utility function
-/*check length of rts/str | 1: len of **rts | 2: len of *str | 3: ln of *str*/
+int		sl_keyinput(int keycode, t_data *data);
+void	sl_key_manage(t_data *data, int keycode);
+int		sl_close(t_data *data);
+int		sl_animating(t_data *data);
+void	sl_mon_patrolswap(t_data *data, int i, int fin, char tmp);
+int		sl_checking_patroling_one(t_data *data, int i, int j, char tmp);
+int		sl_checking_patroling_two(t_data *data, int i, int j, char tmp);
+void	sl_check_collectible(t_data *data, int key, int index);
+void	sl_swapvalue(t_data *data, int mode, char tmp);
+int		sl_walkswap(t_data *data, int mode);
+int		sl_check_misconfig(char **map);
+void 	sl_checkmap_misconfig(t_data *data);
+void	sl_walking_animate(t_data *data);
+void	sl_patroling_animate(t_data *data, int index, int xedni, int mode);
+void	sl_patroling_animate_normal(t_data *data, int index, int xedni);
+void	sl_patroling_animate_spacial(t_data *data, int index, int xedni);
+char	**sl_joininfo_result(char **result, char *str, int index);
+int		sl_moveinfo_result(char **rts, char **result);
+void	sl_imageinit_one(t_data *data);
+void	sl_imageinit_two(t_data *data);
+void	sl_imageinit_three(t_data *data);
+void	sl_imageinit_four(t_data *data);
+void	sl_imageinit_five(t_data *data);
+void	sl_imageinit_six(t_data *data);
+void	sl_imageinit_seven(t_data *data);
+void	sl_imageinit_eight(t_data *data);
+void	sl_imageinit_nine(t_data *data);
+void	sl_imageinit_ten(t_data *data);
+void	sl_imageinit(t_data *data);
+void	sl_destroy_images(t_data *data);
+void    sl_free_for_all(t_data *data, int mode);
+void    *ft_calloc(int size, int count);
+void	sl_putimage_space_layer(t_data *data);
+void	sl_putimage_count(t_data *data);
+void	sl_putimage_mmap(t_data *data, int index, int xedni, int f);
+void	sl_putimage_monster(t_data *data, int f);
+void	sl_putimage_map(t_data *d, int f, int i, int j);
+void	sl_putimage_map_layer(t_data *data, int f);
+void	sl_map_generate(t_data *data, int f);
+void	sl_ending_screen(t_data *data, int f);
+int		sl_checkending(t_data *data, int mode);
+void	sl_ending_one(t_data *data, int f);
+void	sl_ending_two(t_data *data);
+void	sl_ending_two_player(t_data *data);
+void	sl_ending_two_monster(t_data *data);
+void	sl_ending_three_one(t_data *data);
+void	sl_ending_three_two(t_data *data);
+void	sl_ending_three_two_player(t_data *data);
+void	sl_ending_three_two_monster(t_data *data);
+void	sl_make_ummap(t_data *data);
 int		sl_checklen(char **rts, char *str, int mode);
-/*finding c in rts/str | mode1: find in **rts | mode2: finding *str*/
 int		sl_checkcompair(char **rts, char *str, char c, int mode);
-/*tools for **str | mode1: print **str | mode2: free **str*/
-void	twostarstools(void **str, int mode);
-
-
-int	create_colour(int t, int r, int g, int b);
-int	get_colour(int colour, int mode);
-int create_color(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
-unsigned char get_color(int colour, int mode);
+void	sl_twostars_tools(char **str, int mode);
+int		sl_count_digit(int nbr);
+void	sl_print_error(void);
 
 #endif

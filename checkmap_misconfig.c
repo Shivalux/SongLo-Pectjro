@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-//int	sl_checkcomapair(char **rts, char *str, char c, int made);
-//int sl_checklen(char **rts, char *str, int mode);
 
 int	sl_check_misconfig(char **map)
 {

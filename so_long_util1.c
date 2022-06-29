@@ -1,5 +1,4 @@
 #include "so_long.h"
-#include "./libft/libft.h"
 
 	/* counting function*/
 		/* mode1 = count 2D malloc | mode2 = count lenght of a string |
@@ -32,20 +31,20 @@ int	sl_checklen(char **rts, char *str, int mode)
 
     /* tools function for char ** */
         /* mode1 = print value char ** | mode0 = free char ** */
-void twostarstools(void **str, int mode)
+void sl_twostars_tools(char **str, int mode)
 {
 	int	count;
 
 	count = 0;
 	if (str == NULL)
 	{
-		printf("str == NULL\n");
 		return ;
 	}
 	else if (mode == 1)
 	{
-		while ((char *)str[count] != NULL)
-			printf("%s\n", (char *)str[count++]);
+		while (str[count] != NULL)
+			ft_printf("%s\n", str[count++]);
+		ft_printf("\n");
 		return ;
 	}
 	else if (mode == 0)
@@ -55,4 +54,48 @@ void twostarstools(void **str, int mode)
 		free(str);
 		return ;
 	}
+}
+
+	/* function finding a charactor in a string */
+		/* mode1 = finding in 2 stars || mode2 = finding in 1 stars */
+int	sl_checkcompair(char **rts, char *str, char c, int mode)
+{
+	int	index;
+	int	count;
+
+	count = 0;
+	index = 0;
+	if (rts == NULL && mode == 1 || str == NULL && mode == 2)
+		return (0);
+	if (mode == 1)
+	{
+		while (rts[index] != NULL)
+		{
+			count += sl_checkcompair(NULL, rts[index], c, 2);
+			index++;
+		}
+	}
+	if (mode == 2)
+	{
+		while (str[index] != '\0')
+		{	
+			if (str[index] == c)
+				count += 1;
+			index++;
+		}
+	}
+	return (count);
+}
+
+int	sl_count_digit(int nbr)
+{
+	int count;
+
+	count = 0;
+	while (nbr != 0)
+	{
+		count++;
+		nbr = nbr / 10;
+	}
+	return (count);
 }
