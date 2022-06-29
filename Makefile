@@ -19,18 +19,12 @@ CMLX = -Lmlx -lmlx -framework OpenGl -framework AppKit
 
 NAME = 	so_long
 NAME_A = so_long.a
-
 HEAD = so_long.h
-HEAD_DIR = ./include/
-HEADS = $(addprefix $(HEAD_DIR), $(addsuffix .h, $(HEAD)))
 
-SRC = 
-SRCS_DIR = ./src/
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .h, $(SRC)))
-OBJS = $(SRC:.c=.o)
+SRCS = animating.c checkmap_misconfig.c ending_situation1.c ending_situation2.c handler_functions.c image_init1.c image_init2.c map_generated1.c \
+		map_generated2.c patroling_swap.c read_map1.c read_map2.c so_long.c walking_swap.c so_long_util1.c so_long_util2.c
+OBJS = $(SRCS:.c=.o)
 
-LIBFT_DIR = ./libft/
-LIBFT = ./libft/libft.a
 LIBPRINT_DIR = ./libftprintf/
 LIBPRINT = ./libftprintf/libftprintf.a
 GNL_DIR = ./getnextline/
@@ -48,40 +42,34 @@ RM = rm -rf
 ###  ####  ####  ####  ####  ####  ####  ####  ####  ####  ####  ####  ####  ##
 #    ##    ##    ##     ##   ##    ##     ##    ##    ##    ##    ##    ##    #
 
-%.o : %.c
-	$(CC) $(FLAGS) $(MLX) -c &< -o $@ -p ./objes/
-
-$(NAME) : $(OBJS)
-	make -C $(LIBFT_DIR)
+all : $(OBJS)
 	make -C $(LIBPRINT_DIR)
 	make -C $(GNL_DIR)
 	make -C $(MLX_DIR)
 	ar -rc $(NAME_A) $(OBJS)
 	$(CC) $(FLAGS) $(CMLX) $(NAME_A) $(LIBFT) $(LIBPRINT) $(GNL) -o $(NAME)
-
-all : $(NAME)
+	@echo "\n=> MAKE COMPLETE <=\n"
 .PHONY : all
 
+bonus : all
+.PHONY : bonus
+
 norminette :
-	make $(NORM) -C $(GNL_DIR)
-	make $(NORM) -C $(LIBFT_DIR)
-	make $(NOMR) -C $(LIBPRINT_DIR)
-	$(NORM) $(FNORM_C) $(SRCS_DIR)
-	$(NORM) $(FNORM_H) $(HEADS_DIR)
+	@make $(NORM) -C $(GNL_DIR)
+	@make norminette -C ./libftprintf/
+	$(NORM) $(FNORM_C) $(SRCS)
+	# $(NORM) $(FNORM_H) $(HEADS)
 .PHONY : norminette
 
 clean :
 	make clean -C $(MLX_DIR)
 	make clean -C $(GNL_DIR)
-	make clean -C $(LIBFT_DIR)
 	make clean -C $(LIBPRINT_DIR)
 	$(RM) $(OBJS)
 .PHONY : clean
 
 fclean : clean
-	make fclean -C $(MLX_DIR)
 	make fclean -C $(GNL_DIR)
-	make fclean -C $(LIBFT_DIR)
 	make fclean -C $(LIBPRINT_DIR)
 	$(RM) $(NAME) $(NAME_A)
 .PHONY : fclean
@@ -89,7 +77,6 @@ fclean : clean
 re : clean fclean all
 	make re -C $(MLX_DIR)
 	make re -C $(GNL_DIR)
-	make re -C $(LIBFT_DIR)
 	make re -C $(LIBPRINT_DIR)
 .PHONY : re
 

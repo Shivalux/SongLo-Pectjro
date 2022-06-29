@@ -14,29 +14,29 @@
 
 int	ft_atoip(const char *str)
 {
-	int	index_c;
+	int	i_c;
 	int	minus;
 	int	result;
 
 	result = 0;
 	minus = 1;
-	index_c = 0;
-	while ((str[index_c] >= 9 && str[index_c] <= 13) || str[index_c] == ' ')
+	i_c = 0;
+	while ((str[i_c] >= 9 && str[i_c] <= 13) || str[i_c] == ' ')
 	{
-		index_c++;
+		i_c++;
 	}
-	if (str[index_c] == '+' || str[index_c] == '-')
+	if (str[i_c] == '+' || str[i_c] == '-')
 	{
-		if (str[index_c] == '-')
+		if (str[i_c] == '-')
 		{
 			minus = minus * -1;
 		}
-		index_c++;
+		i_c++;
 	}
-	while (str[index_c] != '\0' && str[index_c] >= '0' && str[index_c] <= '9')
+	while (str[i_c] != '\0' && str[i_c] >= '0' && str[i_c] <= '9')
 	{
-		result = result * 10 + (str[index_c] - '0');
-		index_c++;
+		result = result * 10 + (str[i_c] - '0');
+		i_c++;
 	}
 	return (result * minus);
 }
@@ -71,27 +71,27 @@ t_flag	ft_setflags(void)
 
 int	ft_strcmp(char c, char *str)
 {
-	int	index;
+	int	i;
 
-	index = 0;
-	while (str[index] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (str[index] == c)
+		if (str[i] == c)
 			return (1);
-		index++;
+		i++;
 	}
 	return (0);
 }
 
-int	ft_checkdot(const char *format, int index)
+int	ft_checkdot(const char *format, int i)
 {
-	while (ft_strcmp(format[index], "csdiuxXp%") == 0)
+	while (ft_strcmp(format[i], "csdiuxXp%") == 0)
 	{
-		if (format[index] == '.')
+		if (format[i] == '.')
 		{
 			return (1);
 		}
-		index++;
+		i++;
 	}
 	return (0);
 }

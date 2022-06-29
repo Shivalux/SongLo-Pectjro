@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_util2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/29 23:03:58 by sharnvon          #+#    #+#             */
+/*   Updated: 2022/06/29 23:04:17 by sharnvon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	*ft_calloc(int size, int count)
 {
 	void	*result;
-	int		index;
+	int		i;
 	char	*str;
 
-	index = 0;
+	i = 0;
 	result = malloc(size * count);
 	if (result == NULL)
-	return (0);
+		return (0);
 	str = result;
-	while(index < (size * count))
+	while (i < (size * count))
 	{
-		str[index] = 0;
-		index++;
-	}  
-	return (result);
+		str[i] = 0;
+		i++;
 	}
+	return (result);
+}
 
-void    sl_free_for_all(t_data *data, int mode)
+void	sl_free_for_all(t_data *data, int mode)
 {
-	int	index;
+	int	i;
 
-	index = 0;
+	i = 0;
 	if (mode == 2)
 	{
 		mlx_clear_window(data->mlx, data->window);
@@ -32,8 +44,8 @@ void    sl_free_for_all(t_data *data, int mode)
 	}
 	if (data->u != NULL)
 	{
-		while(index < sl_checklen(data->map, NULL, 1))
-			free(data->u[index++]);
+		while (i < sl_checklen(data->map, NULL, 1))
+			free(data->u[i++]);
 		free(data->u);
 	}
 	if (data->map != NULL)
@@ -46,25 +58,25 @@ void    sl_free_for_all(t_data *data, int mode)
 
 void	sl_destroy_images(t_data *data)
 {
-	int	index;
+	int	i;
 
-	index = 0;
+	i = 0;
 	mlx_destroy_image(data->mlx, data->s[0].img);
 	mlx_destroy_image(data->mlx, data->w[0].img);
-	while(index < 10)
-		mlx_destroy_image(data->mlx, data->c[index++].img);
-	index = 0;
-	while(index < 45)
-		mlx_destroy_image(data->mlx, data->p[index++].img);
-	index = 0;
-	while(index < 6)
-		mlx_destroy_image(data->mlx, data->e[index++].img);
-	index = 0;
-	while(index < 40)
-		mlx_destroy_image(data->mlx, data->m[index++].img);
-	index = 0;
-	while (index < 15)
-		mlx_destroy_image(data->mlx, data->n[index++].img);
+	while (i < 10)
+		mlx_destroy_image(data->mlx, data->c[i++].img);
+	i = 0;
+	while (i < 45)
+		mlx_destroy_image(data->mlx, data->p[i++].img);
+	i = 0;
+	while (i < 6)
+		mlx_destroy_image(data->mlx, data->e[i++].img);
+	i = 0;
+	while (i < 40)
+		mlx_destroy_image(data->mlx, data->m[i++].img);
+	i = 0;
+	while (i < 15)
+		mlx_destroy_image(data->mlx, data->n[i++].img);
 }
 
 void	sl_imageinit(t_data *data)
@@ -96,6 +108,6 @@ void	sl_print_error(void)
 	ft_printf(" ===> ./maps/error_map_no_c.ber\n");
 	ft_printf(" ===> ./maps/error_map_no_e.ber\n");
 	ft_printf(" ===> ./maps/error_map_no_p.ber\n");
-	ft_printf(" ===> ./maps/erroe_map_not_rectangle.ber\n");
+	ft_printf(" ===> ./maps/error_map_not_rectangle.ber\n");
 	exit(0);
 }

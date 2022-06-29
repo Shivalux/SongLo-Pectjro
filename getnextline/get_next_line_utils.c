@@ -15,31 +15,31 @@
 char	*gl_calloc(int size)
 {
 	char	*result;
-	int		index;
+	int		i;
 
-	index = 0;
+	i = 0;
 	result = (char *)malloc(size);
 	if (result == NULL)
 		return (0);
-	while (index < size)
+	while (i < size)
 	{
-		result[index] = '\0';
-		index++;
+		result[i] = '\0';
+		i++;
 	}
 	return (result);
 }
 
-int	gl_strlen(char *str, int index)
+int	gl_strlen(char *str, int i)
 {
 	int	count;
 
 	count = 0;
-	if (index == 0)
+	if (i == 0)
 	{
 		while (str[count] != '\0' && str[count] != '\n')
 		count++;
 	}
-	else if (index == 1)
+	else if (i == 1)
 	{
 		while (str[count] != '\0')
 		count++;
@@ -49,16 +49,16 @@ int	gl_strlen(char *str, int index)
 
 int	ft_check_newline(char *temp)
 {
-	int	index;
+	int	i;
 
-	index = 0;
-	while (temp[index] != '\0')
+	i = 0;
+	while (temp[i] != '\0')
 	{
-		if (temp[index] == '\n')
+		if (temp[i] == '\n')
 		{
 			return (1);
 		}
-		index++;
+		i++;
 	}
 	return (0);
 }

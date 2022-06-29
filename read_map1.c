@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map1.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/29 23:09:44 by sharnvon          #+#    #+#             */
+/*   Updated: 2022/06/30 00:34:17 by sharnvon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	**sl_read_map(char **argv)
 {
 	char	**result;
 	char	*line;
-	int		index;
+	int		i;
 	int		fd;
 
 	result = NULL;
-	index = 0;
+	i = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (0);
@@ -25,88 +37,80 @@ char	**sl_read_map(char **argv)
 	return (result);
 }
 
-char **sl_make_mmap(char **map)
+char	**sl_make_mmap(t_data *data)
 {
 	char	**result;
-	int		index;
+	int		i;
 	int		xedni;
-	
-	index = 0;
-	result = (char **)ft_calloc(sizeof(char *), sl_checklen(map, NULL, 1) + 1);
+
+	i = 0;
+	result = (char **)ft_calloc(8, sl_checklen(data->map, NULL, 1) + 1);
 	if (result == NULL)
-	{
-		/* free  another malloc */
-		exit(0);
-	}
-	while (map[index] != NULL)
+		sl_free_for_all(data, 1);
+	while (data->map[i] != NULL)
 	{
 		xedni = 0;
-		result[index] = (char *)ft_calloc(sizeof(char), sl_checklen(NULL, map[index], 2) + 1);
-		if (result[index] == NULL)
+		result[i] = ft_calloc(1, sl_checklen(NULL, data->map[i], 2) + 1);
+		if (result[i] == NULL)
+			sl_free_for_all(data, 1);
+		while (data->map[i][xedni] != '\0')
 		{
-			/* free another malloc */
-			exit(0);
-		}
-		while (map[index][xedni] != '\0')
-		{
-			if (sl_checkcompair (NULL, "PC", map[index][xedni], 2) != 0)
-				result[index][xedni] = '0';
+			if (sl_checkcompair (NULL, "PC", data->map[i][xedni], 2) != 0)
+				result[i][xedni] = '0';
 			else
-				result[index][xedni] = map[index][xedni];
+				result[i][xedni] = data->map[i][xedni];
 			xedni++;
 		}
-		index++;
+		i++;
 	}
 	return (result);
 }
 
-char **sl_make_map(char **map)
+void	sl_make_map(t_data *data, int i)
 {
-	int		index;
 	int		xedni;
 	char	*extra;
 
-	index = 0;
-	while (map[index] != NULL)
+	while (data->map[i] != NULL)
 	{
 		xedni = 0;
-		while (map[index][xedni] != '\0')
+		while (data->map[i][xedni] != '\0')
 		{
-			if (map[index][xedni] == 'M')
-				map[index][xedni] = '0';
+			if (data->map[i][xedni] == 'M')
+				data->map[i][xedni] = '0';
 			xedni++;
 		}
-		index++;
+		i++;
 	}
-	extra = (char *)ft_calloc(sizeof(char), sl_checklen(NULL, map[0], 2) + 1);
+	extra = (char *)ft_calloc(1, sl_checklen(NULL, data->map[0], 2) + 1);
 	if (extra == NULL)
 	{
-		sl_twostars_tools(map, 0);
-		return (0);
+		sl_free_for_all(data, 0);
 	}
 	while (--xedni >= 0)
 		extra[xedni] = '1';
-	map = sl_join_map(map, extra);
-	return (map);
+	data->map = sl_join_map(data->map, extra);
 }
 
 void	sl_make_ummap(t_data *data)
 {
-	int index;
+	int	i;
 
-	index = 0;
-	data->u = (t_char**)ft_calloc(sizeof(t_char*), sl_checklen(data->mmap, NULL, 1));
+	i = 0;
+	data->u = (t_char **)ft_calloc(sizeof(t_char *), \
+		sl_checklen(data->mmap, NULL, 1));
 	if (data->u == NULL)
 	{
 		sl_free_for_all(data, 0);
 	}
-	while (index < sl_checklen(data->mmap, NULL, 1))
+	while (i < sl_checklen(data->mmap, NULL, 1))
 	{
-		data->u[index] = (t_char*)ft_calloc(sizeof(t_char), sl_checklen(NULL, data->mmap[index], 2));
-		if (data->u[index] == NULL)
+		data->u[i] = (t_char *)ft_calloc(sizeof(t_char), \
+			sl_checklen(NULL, data->mmap[i], 2));
+		if (data->u[i] == NULL)
 		{
 			sl_free_for_all(data, 0);
 		}
-		index++;
+		i++;
 	}
 }

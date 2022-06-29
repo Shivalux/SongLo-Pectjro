@@ -6,7 +6,7 @@
 #    By: sharnvon <sharnvon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/27 18:38:37 by sharnvon          #+#    #+#              #
-#    Updated: 2022/04/04 17:16:09 by sharnvon         ###   ########.fr        #
+#    Updated: 2022/06/29 22:22:46 by sharnvon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ $(NAME) : $(OBJS)
 bonus : $(NAME)
 	@ar -crs $(NAME) $(OBJS)
 
+norminette : 
+	@norminette -R CheckForbbidenHeaderSource $(SRCS)
+	@norminette -R CheckDehfine libftprintf.h
+	
 clean: 
 	@rm -rf $(OBJS)
 

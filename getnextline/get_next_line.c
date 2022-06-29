@@ -15,26 +15,26 @@
 char	*ft_info_tranfer(char *temp, char *info, int len)
 {
 	char	*result;
-	int		index;
+	int		i;
 	int		xedni;
 
-	index = 0;
+	i = 0;
 	xedni = 0;
 	result = gl_calloc(sizeof(char) * len + 1);
 	if (result == NULL)
 		return (0);
-	while ((temp != NULL && temp[index] != '\0'))
+	while ((temp != NULL && temp[i] != '\0'))
 	{
-		result[index] = temp[index];
-		index++;
+		result[i] = temp[i];
+		i++;
 		len--;
 	}
 	while (len > 0)
 	{
-		result[index++] = info[xedni++];
+		result[i++] = info[xedni++];
 		len--;
 	}
-	result[index] = '\0';
+	result[i] = '\0';
 	if (temp == NULL)
 		return (result);
 	free(temp);
@@ -90,21 +90,21 @@ char	*ft_read_file(int fd, char *temp, int len)
 	return (temp);
 }
 
-char	*ft_checknstore_brain(char *result, char *temp, int index, int len)
+char	*ft_checknstore_brain(char *result, char *temp, int i, int len)
 {
 	int		xedni;
 	char	*brain;
 
 	xedni = 0;
-	brain = gl_calloc(sizeof(char) * gl_strlen(&temp[index], 1) + 1);
+	brain = gl_calloc(sizeof(char) * gl_strlen(&temp[i], 1) + 1);
 	if (brain == NULL)
 		return (0);
-	while (temp[index] != '\0')
-		brain[xedni++] = temp[index++];
+	while (temp[i] != '\0')
+		brain[xedni++] = temp[i++];
 	brain[xedni] = '\0';
 	if (brain == NULL || brain[0] == '\0')
 	{
-		if (temp[index - 1] == '\n')
+		if (temp[i - 1] == '\n')
 			result[len++] = '\n';
 		result[len] = '\0';
 		free(temp);
@@ -123,11 +123,11 @@ char	*get_next_line(int fd)
 	char				*result;
 	char				*temp;
 	static char			*brain;
-	int					index;
+	int					i;
 	int					len;
 
 	temp = NULL;
-	index = 0;
+	i = 0;
 	len = 0;
 	temp = ft_checknread_temp(fd, temp, brain);
 	if (temp == NULL)
@@ -135,10 +135,10 @@ char	*get_next_line(int fd)
 	result = gl_calloc(sizeof(char) * gl_strlen(temp, 0) + 2);
 	if (result == NULL)
 		return (0);
-	while (temp[index] != '\n' && temp[index] != '\0')
-		result[len++] = temp[index++];
-	if (temp[index] == '\n')
-		index++;
-	brain = ft_checknstore_brain(result, temp, index, len);
+	while (temp[i] != '\n' && temp[i] != '\0')
+		result[len++] = temp[i++];
+	if (temp[i] == '\n')
+		i++;
+	brain = ft_checknstore_brain(result, temp, i, len);
 	return (result);
 }

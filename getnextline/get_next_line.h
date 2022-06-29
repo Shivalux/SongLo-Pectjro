@@ -23,9 +23,9 @@ char	*get_next_line(int fd);
 char	*ft_info_tranfer(char *temp, char *info, int len);
 char	*ft_read_file(int fd, char *temp, int len);
 char	*ft_checknread_temp(int fd, char *temp, char *brain);
-char	*ft_checknstore_brain(char *result, char *temp, int index, int len);
+char	*ft_checknstore_brain(char *result, char *temp, int i, int len);
 char	*gl_calloc(int size);
-int		gl_strlen(char *str, int index);
+int		gl_strlen(char *str, int i);
 int		ft_check_newline(char *temp);
 
 #endif

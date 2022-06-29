@@ -38,10 +38,10 @@ int	ft_printflags(char c, int len, int wi)
 
 int	ft_putstr_len(char *str, int len, t_flag fl)
 {
-	int	index;
+	int	i;
 	int	slen;
 
-	index = 0;
+	i = 0;
 	if (str == NULL)
 	{
 		len = ft_putstr_len("(null)", len, fl);
@@ -50,10 +50,10 @@ int	ft_putstr_len(char *str, int len, t_flag fl)
 	slen = ft_nstrlen(str, 1, 1);
 	if (fl.dt >= 0)
 		slen = ft_nstrlen(str, fl.dt, 2);
-	while (index < slen && str[index] != '\0')
+	while (i < slen && str[i] != '\0')
 	{
-		write(1, &str[index], 1);
-		index++;
+		write(1, &str[i], 1);
+		i++;
 		len++;
 	}
 	return (len);

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   walking_swap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/29 23:06:07 by sharnvon          #+#    #+#             */
+/*   Updated: 2022/06/29 23:06:10 by sharnvon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void	sl_check_collectible(t_data *data, int key, int index)
+void	sl_check_collectible(t_data *data, int key, int i)
 {
-	int xedni;
+	int	xedni;
 
 	if (key == KEY_W && data->map[data->x - 1][data->y] == 'C')
 		data->map[data->x - 1][data->y] = '0';
@@ -14,16 +26,16 @@ void	sl_check_collectible(t_data *data, int key, int index)
 		data->map[data->x][data->y + 1] = '0';
 	if (sl_checkcompair(data->map, NULL, 'C', 1) == 0)
 	{
-		while (data->map[index] != NULL)
+		while (data->map[i] != NULL)
 		{
 			xedni = 0;
-			while (data->map[index][xedni] != '\0')
+			while (data->map[i][xedni] != '\0')
 			{
-				if (data->map[index][xedni] == 'E')
-					data->map[index][xedni] = '0';
+				if (data->map[i][xedni] == 'E')
+					data->map[i][xedni] = '0';
 				xedni++;
 			}
-			index++;
+			i++;
 		}
 	}
 }
@@ -54,7 +66,6 @@ void	sl_swapvalue(t_data *data, int mode, char tmp)
 		data->map[data->x][data->y] = data->map[data->x][data->y + 1];
 		data->map[data->x][data->y + 1] = tmp;
 	}
-	// sl_check_collectible(data, mode, 0);
 	data->wk = 1;
 }
 
@@ -62,46 +73,24 @@ int	sl_walkswap(t_data *data, int mode)
 {
 	char	tmp;
 
+	tmp = '\0';
 	sl_check_collectible(data, mode, 0);
 	sl_swapvalue(data, mode, tmp);
-	if (mode == KEY_W)// && sl_checkcompair (0, "1E", d->map[d->x - 1][d->y], 2) == 0)// && data->map[data->x - 1][data->y] != 'E')/* up */
+	if (mode == KEY_W)
 	{	
-		// sl_check_collectible(data, mode, 0);
-		// tmp = data->map[data->x][data->y];
-		// data->map[data->x][data->y] = data->map[data->x - 1][data->y];
-		// data->map[data->x - 1][data->y] = tmp;
-		//sl_swapvalue(data, mode, tmp);
 		data->key = KEY_W;
-		// data->wk = 1;
 	}
-	else if (mode == KEY_A)// && data->map[data->x][data->y - 1] != '1' && data->map[data->x][data->y - 1] != 'E')/* left */
+	else if (mode == KEY_A)
 	{
-		// sl_check_collectible(data, mode, 0);
-		// tmp = data->map[data->x][data->y];
-		// data->map[data->x][data->y] = data->map[data->x][data->y -1];
-		// data->map[data->x][data->y - 1] = tmp;
-		//sl_swapvalue(data, mode, tmp);
 		data->key = KEY_A;
-		// data->wk = 1;
 	}
-	else if (mode == KEY_S)// && data->map[data->x + 1][data->y] != '1' && data->map[data->x + 1][data->y] != 'E')/* down */
+	else if (mode == KEY_S)
 	{
-		// sl_check_collectible(data, mode, 0);
-		// tmp = data->map[data->x][data->y];
-		// data->map[data->x][data->y] = data->map[data->x + 1][data->y];
-		// data->map[data->x + 1][data->y] = tmp;
-		//sl_swapvalue(data, mode, tmp)
 		data->key = KEY_S;
-		// data->wk = 1;
 	}
-	else if (mode == KEY_D)// && data->map[data->x][data->y + 1] != '1' && data->map[data->x][data->y + 1] != 'E')/* right */
+	else if (mode == KEY_D)
 	{
-		// sl_check_collectible(data, mode, 0);
-		// tmp = data->map[data->x][data->y];
-		// data->map[data->x][data->y] = data->map[data->x][data->y + 1];
-		// data->map[data->x][data->y + 1] = tmp;
 		data->key = KEY_D;
-		// data->wk = 1;
 	}
 	return (1);
 }

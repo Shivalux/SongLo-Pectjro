@@ -1,109 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/30 00:31:36 by sharnvon          #+#    #+#             */
+/*   Updated: 2022/06/30 00:31:42 by sharnvon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	**sl_join_map(char **rts, char *str)
 {
 	char	**result;
-	int		index;
-	int		xedni;
+	int		i;
 
-	//index = 0;
 	if (str == NULL)
 		return (rts);
 	if (rts == NULL)
 		result = (char **)ft_calloc(sizeof(char *), 2);
 	else
-		result = (char **)ft_calloc(sizeof(char *), sl_checklen(rts, NULL, 1) + 2);
+		result = (char **)ft_calloc(8, sl_checklen(rts, NULL, 1) + 2);
 	if (result == NULL)
 	{
-		/* free another result that use to malloc ??*/
-		exit(0);
+		sl_twostars_tools(rts, 0);
+		free(str);
+		return (0);
 	}
-	// while (rts != NULL && rts[index] != NULL)
-	// {
-	// 	xedni = 0;
-	// 	result[index] = (char *)ft_calloc(sizeof(char), sl_checklen(NULL, rts[index], 3) + 1);
-	// 	if (result == NULL)
-	// 	{
-	// 		/* free another result that use to malloc ??*/
-	// 		exit(0);
-	// 	}
-	// 	while (rts[index][xedni] != '\0' && rts[index][xedni] != '\n')
-	// 	{
-	// 		result[index][xedni] = rts[index][xedni];
-	// 		xedni++;
-	// 	}
-	// 	result[index][xedni] = '\0';
-	// 	index++;
-	// }
-	index = sl_moveinfo_result(rts, result);
-	// result[index] = (char *)ft_calloc(sizeof(char *), sl_checklen(NULL, str, 3) + 1);
-	// if (result == NULL)
-	// {
-	// 	/* free another result that use to malloc ??*/
-	// 	exit(0);
-	// }
-	// xedni = 0;
-	// while (str[xedni] != '\0' && str[xedni] != '\n')
-	// {
-	// 	result[index][xedni] = str[xedni];
-	// 	xedni++;
-	// }
-	// result[++index] = NULL;
-	result = sl_joininfo_result(result, str, index);
+	i = sl_moveinfo_result(rts, result);
+	result = sl_joininfo_result(result, str, i);
 	sl_twostars_tools(rts, 2);
-	// if (rts != NULL)
-	// {
-	// 	index = 0;
-	// 	while (rts[index] != NULL)
-	// 		free(rts[index++]);
-	// 	free(rts);
-	// }
 	free(str);
 	return (result);
 }
 
 int	sl_moveinfo_result(char **rts, char **result)
 {
-	int	index;
-	int xedni;
+	int	i;
+	int	xedni;
 
-	index = 0;
-	while (rts != NULL && rts[index] != NULL)
+	i = 0;
+	while (rts != NULL && rts[i] != NULL)
 	{
 		xedni = 0;
-		result[index] = (char *)ft_calloc(sizeof(char), sl_checklen(NULL, rts[index], 3) + 1);
+		result[i] = (char *)ft_calloc(1, sl_checklen(NULL, rts[i], 3) + 1);
 		if (result == NULL)
 		{
-			/* free another result that use to malloc ??*/
-			exit(0);
+			sl_twostars_tools(rts, 0);
+			sl_twostars_tools(result, 0);
+			return (0);
 		}
-		while (rts[index][xedni] != '\0' && rts[index][xedni] != '\n')
+		while (rts[i][xedni] != '\0' && rts[i][xedni] != '\n')
 		{
-			result[index][xedni] = rts[index][xedni];
+			result[i][xedni] = rts[i][xedni];
 			xedni++;
 		}
-		result[index][xedni] = '\0';
-		index++;
+		result[i][xedni] = '\0';
+		i++;
 	}
-	return (index);
+	return (i);
 }
 
-char **sl_joininfo_result(char **result, char *str, int index)
+char	**sl_joininfo_result(char **result, char *str, int i)
 {
 	int	xedni;
 
-	result[index] = (char *)ft_calloc(sizeof(char *), sl_checklen(NULL, str, 3) + 1);
+	result[i] = (char *)ft_calloc(8, sl_checklen(NULL, str, 3) + 1);
 	if (result == NULL)
 	{
-		/* free another result that use to malloc ??*/
-		exit(0);
+		sl_twostars_tools(result, 0);
+		free(str);
+		return (0);
 	}
 	xedni = 0;
 	while (str[xedni] != '\0' && str[xedni] != '\n')
 	{
-		result[index][xedni] = str[xedni];
+		result[i][xedni] = str[xedni];
 		xedni++;
 	}
-	result[++index] = NULL;
+	result[++i] = NULL;
 	return (result);
 }

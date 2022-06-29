@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_util1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/29 23:04:33 by sharnvon          #+#    #+#             */
+/*   Updated: 2022/06/29 23:05:26 by sharnvon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 	/* counting function*/
@@ -29,9 +41,9 @@ int	sl_checklen(char **rts, char *str, int mode)
 	return (-1);
 }
 
-    /* tools function for char ** */
-        /* mode1 = print value char ** | mode0 = free char ** */
-void sl_twostars_tools(char **str, int mode)
+	/* tools function for char ** */
+		/* mode1 = print value char ** | mode0 = free char ** */
+void	sl_twostars_tools(char **str, int mode)
 {
 	int	count;
 
@@ -60,28 +72,28 @@ void sl_twostars_tools(char **str, int mode)
 		/* mode1 = finding in 2 stars || mode2 = finding in 1 stars */
 int	sl_checkcompair(char **rts, char *str, char c, int mode)
 {
-	int	index;
+	int	i;
 	int	count;
 
 	count = 0;
-	index = 0;
-	if (rts == NULL && mode == 1 || str == NULL && mode == 2)
+	i = 0;
+	if ((rts == NULL && mode == 1) || (str == NULL && mode == 2))
 		return (0);
 	if (mode == 1)
 	{
-		while (rts[index] != NULL)
+		while (rts[i] != NULL)
 		{
-			count += sl_checkcompair(NULL, rts[index], c, 2);
-			index++;
+			count += sl_checkcompair(NULL, rts[i], c, 2);
+			i++;
 		}
 	}
 	if (mode == 2)
 	{
-		while (str[index] != '\0')
+		while (str[i] != '\0')
 		{	
-			if (str[index] == c)
+			if (str[i] == c)
 				count += 1;
-			index++;
+			i++;
 		}
 	}
 	return (count);
@@ -89,7 +101,7 @@ int	sl_checkcompair(char **rts, char *str, char c, int mode)
 
 int	sl_count_digit(int nbr)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (nbr != 0)

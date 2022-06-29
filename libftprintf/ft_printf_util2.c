@@ -72,14 +72,14 @@ int	ft_countul(unsigned long int nbr, int base)
 
 void	ft_bbzero(void *s, size_t n)
 {
-	size_t	index;
+	size_t	i;
 	char	*ns;
 
-	index = 0;
+	i = 0;
 	ns = s;
-	while (index < n)
+	while (i < n)
 	{
-		ns[index] = 0;
-		index++;
+		ns[i] = 0;
+		i++;
 	}
 }
