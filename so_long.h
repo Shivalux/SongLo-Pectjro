@@ -6,7 +6,7 @@
 /*   By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 21:24:47 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/29 01:19:43 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/30 00:50:13 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,20 @@ typedef struct s_file
 	int		hei;
 }	t_file;
 
-typedef	struct s_char
+typedef struct s_char
 {
-	int k;
+	int	k;
 	int	pf;
-	int mv;
+	int	mv;
 	int	kil;
 	int	x;
-	int y;
-}
-	t_char;
+	int	y;
+}	t_char;
 
 typedef struct s_data
 {
-	void    *mlx;
-	void    *window;
+	void	*mlx;
+	void	*window;
 	char	**map;
 	char	**mmap;
 	int		x;
@@ -69,7 +68,7 @@ typedef struct s_data
 	int		wk;
 	t_char	i[1];
 	t_char	**u;
-}   t_data;
+}	t_data;
 
 char	**sl_read_map(char **arg);
 char	**sl_make_mmap(t_data *data);
@@ -87,7 +86,7 @@ void	sl_check_collectible(t_data *data, int key, int i);
 void	sl_swapvalue(t_data *data, int mode, char tmp);
 int		sl_walkswap(t_data *data, int mode);
 int		sl_check_misconfig(char **map);
-void 	sl_checkmap_misconfig(t_data *data);
+void	sl_checkmap_misconfig(t_data *data);
 void	sl_walking_animate(t_data *data);
 void	sl_patroling_animate(t_data *data, int i, int xedni, int mode);
 void	sl_patroling_animate_normal(t_data *data, int i, int xedni);
@@ -106,8 +105,8 @@ void	sl_imageinit_nine(t_data *data);
 void	sl_imageinit_ten(t_data *data);
 void	sl_imageinit(t_data *data);
 void	sl_destroy_images(t_data *data);
-void    sl_free_for_all(t_data *data, int mode);
-void    *ft_calloc(int size, int count);
+void	sl_free_for_all(t_data *data, int mode);
+void	*ft_calloc(int size, int count);
 void	sl_putimage_space_layer(t_data *data);
 void	sl_putimage_count(t_data *data);
 void	sl_putimage_mmap(t_data *data, int i, int xedni, int f);

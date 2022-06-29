@@ -6,7 +6,7 @@
 #    By: sharnvon <sharnvon@student.42bangkok.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:25:14 by sharnvon          #+#    #+#              #
-#    Updated: 2022/06/12 21:23:35 by sharnvon         ###   ########.fr        #
+#    Updated: 2022/06/30 00:47:55 by sharnvon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -58,7 +58,7 @@ norminette :
 	@make $(NORM) -C $(GNL_DIR)
 	@make norminette -C ./libftprintf/
 	$(NORM) $(FNORM_C) $(SRCS)
-	# $(NORM) $(FNORM_H) $(HEADS)
+	$(NORM) $(FNORM_H) $(HEAD)
 .PHONY : norminette
 
 clean :
