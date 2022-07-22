@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 00:31:36 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/30 00:31:42 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:07:05 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**sl_join_map(char **rts, char *str)
 	}
 	i = sl_moveinfo_result(rts, result);
 	result = sl_joininfo_result(result, str, i);
-	sl_twostars_tools(rts, 2);
+	sl_twostars_tools(rts, 0);
 	free(str);
 	return (result);
 }

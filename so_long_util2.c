@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 23:03:58 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/29 23:04:17 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:17:00 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void	sl_free_for_all(t_data *data, int mode)
 	}
 	if (data->u != NULL)
 	{
-		while (i < sl_checklen(data->map, NULL, 1))
+		while (i < sl_checklen(data->mmap, NULL, 1))
+		{
 			free(data->u[i++]);
+		}
 		free(data->u);
 	}
 	if (data->map != NULL)

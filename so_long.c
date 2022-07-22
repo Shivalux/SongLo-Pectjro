@@ -6,7 +6,7 @@
 /*   By: sharnvon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 23:06:54 by sharnvon          #+#    #+#             */
-/*   Updated: 2022/06/29 23:09:27 by sharnvon         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:36:00 by sharnvon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 	sl_imageinit(data);
 	sl_map_generate(data, 0);
 	mlx_hook(data->window, 17, 0, sl_close, data);
-	mlx_key_hook(data->window, sl_keyinput, data);
+	mlx_hook(data->window, 2, 1L << 0, sl_keyinput, data);
 	mlx_loop_hook(data->mlx, sl_animating, data);
 	mlx_loop(data->mlx);
 	return (0);
